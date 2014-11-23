@@ -4053,7 +4053,7 @@ uint32_t BlockDataManager_LevelDB::detectAllBlkFiles(void)
    blkFileCumul_.clear();
    while(numBlkFiles_ < UINT16_MAX)
    {
-      string path = BtcUtils::getBlkFilename(blkFileDir_, numBlkFiles_);
+      string path = BtcUtils::getBlkFilename(blkFileDir_);
       uint64_t filesize = BtcUtils::GetFileSize(path);
       if(filesize == FILE_DOES_NOT_EXIST)
          break;
@@ -4909,7 +4909,7 @@ uint32_t BlockDataManager_LevelDB::readBlkFileUpdate(void)
 
    // Check to see if there was a blkfile split, and we have to switch
    // to tracking the new file..  this condition triggers about once a week
-   string nextFilename = BtcUtils::getBlkFilename(blkFileDir_, numBlkFiles_);
+   string nextFilename = BtcUtils::getBlkFilename(blkFileDir_);
    uint64_t nextBlkBytesToRead = BtcUtils::GetFileSize(nextFilename);
    if(nextBlkBytesToRead == FILE_DOES_NOT_EXIST)
       nextBlkBytesToRead = 0;

@@ -1316,13 +1316,10 @@ public:
 
    // This got more complicated when Bitcoin-Qt 0.8 switched from
    // blk0001.dat to blocks/blk00000.dat
-   static string getBlkFilename(string dir, uint32_t fblkNum)
+   static string getBlkFilename(string dir)
    {
-      /// Update:  It's been enough time since the hardfork that just about 
-      //           everyone must've upgraded to 0.8+ by now... remove pre-0.8
-      //           compatibility.
       char* fname = new char[1024];
-      sprintf(fname, "%s/blk%05d.dat", dir.c_str(), fblkNum);
+      sprintf(fname, "%s/blk0001.dat", dir.c_str());
       string strName(fname);
       delete[] fname;
       return strName;

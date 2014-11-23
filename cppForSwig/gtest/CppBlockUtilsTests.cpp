@@ -5872,7 +5872,7 @@ protected:
       mkdir(homedir_);
 
       // Put the first 5 blocks into the blkdir
-      blk0dat_ = BtcUtils::getBlkFilename(blkdir_, 0);
+      blk0dat_ = BtcUtils::getBlkFilename(blkdir_);
       BtcUtils::copyFile("../reorgTest/blk_0_to_4.dat", blk0dat_);
 
       TheBDM.SelectNetwork("Main");
@@ -6737,7 +6737,7 @@ protected:
       mkdir(homedir_);
 
       // Put the first 5 blocks into the blkdir
-      blk0dat_ = BtcUtils::getBlkFilename(blkdir_, 0);
+      blk0dat_ = BtcUtils::getBlkFilename(blkdir_);
       BtcUtils::copyFile("../reorgTest/blk_0_to_4.dat", blk0dat_);
 
       TheBDM.SetDatabaseModes(ARMORY_DB_SUPER, DB_PRUNE_NONE);
@@ -6869,14 +6869,14 @@ TEST_F(BlockUtilsSuper, HeadersOnly_Reorg)
    EXPECT_EQ(iface_->getTopBlockHeight(HEADERS), 4);
    EXPECT_EQ(iface_->getTopBlockHash(HEADERS), blkHash4);
 
-   BtcUtils::copyFile("../reorgTest/blk_3A.dat", BtcUtils::getBlkFilename(blkdir_, 1));
+   BtcUtils::copyFile("../reorgTest/blk_3A.dat", BtcUtils::getBlkFilename(blkdir_));
    TheBDM.processNewHeadersInBlkFiles(1);
    EXPECT_EQ(iface_->getTopBlockHeight(HEADERS), 4);
    EXPECT_EQ(iface_->getTopBlockHash(HEADERS), blkHash4);
    EXPECT_FALSE(TheBDM.getHeaderByHash(blkHash3A)->isMainBranch());
    EXPECT_TRUE( TheBDM.getHeaderByHash(blkHash3 )->isMainBranch());
 
-   BtcUtils::copyFile("../reorgTest/blk_4A.dat", BtcUtils::getBlkFilename(blkdir_, 2));
+   BtcUtils::copyFile("../reorgTest/blk_4A.dat", BtcUtils::getBlkFilename(blkdir_));
    TheBDM.processNewHeadersInBlkFiles(2);
    EXPECT_EQ(iface_->getTopBlockHeight(HEADERS), 4);
    EXPECT_EQ(iface_->getTopBlockHash(HEADERS), blkHash4);
@@ -6885,7 +6885,7 @@ TEST_F(BlockUtilsSuper, HeadersOnly_Reorg)
    EXPECT_FALSE(TheBDM.getHeaderByHash(blkHash4A)->isMainBranch());
    EXPECT_TRUE( TheBDM.getHeaderByHash(blkHash4 )->isMainBranch());
 
-   BtcUtils::copyFile("../reorgTest/blk_5A.dat", BtcUtils::getBlkFilename(blkdir_, 3));
+   BtcUtils::copyFile("../reorgTest/blk_5A.dat", BtcUtils::getBlkFilename(blkdir_));
    TheBDM.processNewHeadersInBlkFiles(3);
    EXPECT_EQ(iface_->getTopBlockHeight(HEADERS), 5);
    EXPECT_EQ(iface_->getTopBlockHeight(HEADERS), 5);
@@ -7191,7 +7191,7 @@ protected:
       mkdir(homedir_);
 
       // Put the first 5 blocks into the blkdir
-      blk0dat_ = BtcUtils::getBlkFilename(blkdir_, 0);
+      blk0dat_ = BtcUtils::getBlkFilename(blkdir_;
       BtcUtils::copyFile("../reorgTest/blk_0_to_4.dat", blk0dat_);
 
       TheBDM.SetDatabaseModes(ARMORY_DB_SUPER, DB_PRUNE_NONE);
