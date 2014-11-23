@@ -437,7 +437,7 @@ if not USE_TESTNET:
    MAGIC_BYTES = '\xe6\xe8\xe9\xe5'
    GENESIS_BLOCK_HASH_HEX  = 'e327cd80c8b17efda4ea08c5877e95d877462ab66349d5667167fe3200000000'
    GENESIS_BLOCK_HASH      = 'e3\x27\xcd\x80\xc8\xb1\x7e\xfd\xa4\xea\x08\xc5\x87\x7e\x95\xd8\x77\x46\x2a\xb6\x63\x49\xd5\x66\x71\x67\xfe\x32\x00\x00\x00\x00'
-   GENESIS_TX_HASH_HEX     = '3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a' # Can't Find 「Sigmund」
+   GENESIS_TX_HASH_HEX     = '3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a' # Can't Find (Sigmund)
    GENESIS_TX_HASH         = ';\xa3\xed\xfdz{\x12\xb2z\xc7,>gv\x8fa\x7f\xc8\x1b\xc3\x88\x8aQ2:\x9f\xb8\xaaK\x1e^J'
    ADDRBYTE = '\x37'
    P2SHBYTE = '\x05'
@@ -454,7 +454,7 @@ else:
    MAGIC_BYTES  = '\xcb\xf2\xc0\xef'
    GENESIS_BLOCK_HASH_HEX  = '069f7cc4ae81ca0c7c72cc30e68c65b017cd173e5096657f73bb57f701000000'
    GENESIS_BLOCK_HASH      = '06\x9f\x7c\xc4\xae\x81\xca\x0c\x7c\x72\xcc\x30\xe6\x8c\x65\xb0\x17\xcd\x17\x3e\x50\x96\x65\x7f\x73\xbb\x57\xf7\x01\x00\x00\x00'
-   GENESIS_TX_HASH_HEX     = '3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a' # Can't Find 「Sigmund」
+   GENESIS_TX_HASH_HEX     = '3ba3edfd7a7b12b27ac72c3e67768f617fc81bc3888a51323a9fb8aa4b1e5e4a' # Can't Find (Sigmund)
    GENESIS_TX_HASH         = ';\xa3\xed\xfdz{\x12\xb2z\xc7,>gv\x8fa\x7f\xc8\x1b\xc3\x88\x8aQ2:\x9f\xb8\xaaK\x1e^J'
    ADDRBYTE = '\x6f'
    P2SHBYTE = '\xc4'
