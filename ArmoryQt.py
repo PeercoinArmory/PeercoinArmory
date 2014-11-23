@@ -2372,7 +2372,7 @@ class ArmoryMainWindow(QMainWindow):
 
    #############################################################################
    def checkHaveBlockfiles(self):
-      return os.path.exists(os.path.join(TheBDM.btcdir, 'blocks'))
+      return os.path.exists(TheBDM.btcdir)
 
    #############################################################################
    def onlineModeIsPossible(self):
@@ -5303,8 +5303,8 @@ class ArmoryMainWindow(QMainWindow):
             lastBlkTime = info['toptime']
 
          # Use a reference point if we are starting from scratch
-         refBlock = max(290746,      lastBlkNum)
-         refTime  = max(1394922889,  lastBlkTime)
+         refBlock = max(144800,      lastBlkNum)
+         refTime  = max(1416700000,  lastBlkTime)
 
 
          # Ten min/block is pretty accurate, even from genesis (about 1% slow)

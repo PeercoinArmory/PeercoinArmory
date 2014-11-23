@@ -182,7 +182,7 @@ def onlineModeIsPossible(internetAvail, forceOnline):
 # Helper function from ArmoryQt. Check to see if we have the blk*.dat files.
 # (NB: Should be removed in 0.93 and combined w/ ArmoryQt code.)
 def checkHaveBlockfiles():
-   return os.path.exists(os.path.join(TheBDM.btcdir, 'blocks'))
+   return os.path.exists(TheBDM.btcdir)
 
 
 #############################################################################

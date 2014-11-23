@@ -266,7 +266,7 @@ class SatoshiDaemonManager(object):
                
 
       # If they don't even have a BTC_HOME_DIR, corebtc never been installed
-      blockDir = os.path.join(self.satoshiHome, 'blocks')
+      blockDir = self.satoshiHome
       if not os.path.exists(self.satoshiHome) or not os.path.exists(blockDir):
          return True
       
@@ -785,9 +785,7 @@ class SatoshiDaemonManager(object):
             return 'BitcoindReady'
 
          # If we get here, bitcoind is gave us a response.
-         print RightNow()
-         print time.mktime(time.strptime(latestInfo['toptime'], "%Y-%m-%d %H:%M:%S %Z"))
-         secSinceLastBlk = RightNow() - time.mktime(time.strptime(latestInfo['toptime'], "%Y-%m-%d %H:%M:%S %Z"))
+         secSinceLastBlk = RightNow() - latestInfo['toptime']
          blkspersec = latestInfo['blkspersec']
          #print 'Blocks per 10 sec:', ('UNKNOWN' if blkspersec==-1 else blkspersec*10)
          if secSinceLastBlk > 4*HOUR or blkspersec==-1:
@@ -819,7 +817,7 @@ class SatoshiDaemonManager(object):
       try:
          numblks = self.proxy.getinfo()['blocks']
          blkhash = self.proxy.getblockhash(numblks)
-         toptime = self.proxy.getblock(blkhash)['time']
+         toptime = time.mktime(time.strptime(self.proxy.getblock(blkhash)['time'], "%Y-%m-%d %H:%M:%S %Z"))
          #LOGDEBUG('RPC Call: numBlks=%d, toptime=%d', numblks, toptime)
          # Only overwrite once all outputs are retrieved
          self.lastTopBlockInfo['numblks'] = numblks
