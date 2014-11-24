@@ -4051,19 +4051,13 @@ uint32_t BlockDataManager_LevelDB::detectAllBlkFiles(void)
    blkFileList_.clear();
    blkFileSizes_.clear();
    blkFileCumul_.clear();
-   while(numBlkFiles_ < UINT16_MAX)
-   {
-      string path = BtcUtils::getBlkFilename(blkFileDir_);
-      uint64_t filesize = BtcUtils::GetFileSize(path);
-      if(filesize == FILE_DOES_NOT_EXIST)
-         break;
-
-      numBlkFiles_++;
-      blkFileList_.push_back(string(path));
-      blkFileSizes_.push_back(filesize);
-      blkFileCumul_.push_back(totalBlockchainBytes_);
-      totalBlockchainBytes_ += filesize;
-   }
+   string path = BtcUtils::getBlkFilename(blkFileDir_);
+   uint64_t filesize = BtcUtils::GetFileSize(path);
+   numBlkFiles_++;
+   blkFileList_.push_back(string(path));
+   blkFileSizes_.push_back(filesize);
+   blkFileCumul_.push_back(totalBlockchainBytes_);
+   totalBlockchainBytes_ += filesize;
 
    if(numBlkFiles_==UINT16_MAX)
    {
