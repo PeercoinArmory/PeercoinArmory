@@ -817,7 +817,7 @@ class SatoshiDaemonManager(object):
       try:
          numblks = self.proxy.getinfo()['blocks']
          blkhash = self.proxy.getblockhash(numblks)
-         toptime = self.proxy.getblock(blkhash)['time']
+         toptime = time.mktime(time.strptime(self.proxy.getblock(blkhash)['time'], "%Y-%m-%d %H:%M:%S %Z"))
          #LOGDEBUG('RPC Call: numBlks=%d, toptime=%d', numblks, toptime)
          # Only overwrite once all outputs are retrieved
          self.lastTopBlockInfo['numblks'] = numblks
