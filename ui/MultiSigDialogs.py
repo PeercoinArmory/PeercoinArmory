@@ -952,8 +952,8 @@ class DlgLockboxManager(ArmoryDialog):
                'button':  tr('Create Spending Tx'),
                'callbk':  self.doSpend,
                'organiz': True,
-               'lbltxt':  tr('Send bitcoins from lockbox'),
-               'tiptxt':  tr("""Create a proposed transaction sending bitcoins
+               'lbltxt':  tr('Send peercoins from lockbox'),
+               'tiptxt':  tr("""Create a proposed transaction sending peercoins
                                 to an address, wallet or another lockbox.  
                                 The transaction will not be final until enough
                                 signatures have been collected and then 

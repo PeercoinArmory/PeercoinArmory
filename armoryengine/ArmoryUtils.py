@@ -53,7 +53,7 @@ from qrcodenative import QRCode, QRErrorCorrectLevel
 BTCARMORY_VERSION    = (0, 92,  3, 0)  # (Major, Minor, Bugfix, AutoIncrement)
 PYBTCWALLET_VERSION  = (1, 35,  0, 0)  # (Major, Minor, Bugfix, AutoIncrement)
 
-ARMORY_DONATION_ADDR = '1ArmoryXcfq7TnCSuZa9fQjRYwJ4bkRKfv'
+ARMORY_DONATION_ADDR = 'PBT8CBNg19JLQpEx6iJvx29HZ6NLudLDjM'
 ARMORY_DONATION_PUBKEY = ( '04'
       '11d14f8498d11c33d08b0cd7b312fb2e6fc9aebd479f8e9ab62b5333b2c395c5'
       'f7437cab5633b5894c4a5c2132716bc36b7571cbe492a7222442b75df75b9a84')
@@ -72,9 +72,9 @@ haveGUI = [False, None]
 parser = optparse.OptionParser(usage="%prog [options]\n")
 parser.add_option("--settings",        dest="settingsPath",default='DEFAULT', type="str",          help="load Armory with a specific settings file")
 parser.add_option("--datadir",         dest="datadir",     default='DEFAULT', type="str",          help="Change the directory that Armory calls home")
-parser.add_option("--satoshi-datadir", dest="satoshiHome", default='DEFAULT', type='str',          help="The Bitcoin-Qt/bitcoind home directory")
-parser.add_option("--satoshi-port",    dest="satoshiPort", default='DEFAULT', type="str",          help="For Bitcoin-Qt instances operating on a non-standard port")
-parser.add_option("--satoshi-rpcport", dest="satoshiRpcport",default='DEFAULT',type="str",         help="RPC port Bitcoin-Qt instances operating on a non-standard port")
+parser.add_option("--satoshi-datadir", dest="satoshiHome", default='DEFAULT', type='str',          help="The Peercoin-Core/bitcoind home directory")
+parser.add_option("--satoshi-port",    dest="satoshiPort", default='DEFAULT', type="str",          help="For Peercoin-Core instances operating on a non-standard port")
+parser.add_option("--satoshi-rpcport", dest="satoshiRpcport",default='DEFAULT',type="str",         help="RPC port Peercoin-Core instances operating on a non-standard port")
 #parser.add_option("--bitcoind-path",   dest="bitcoindPath",default='DEFAULT', type="str",         help="Path to the location of bitcoind on your system")
 parser.add_option("--dbdir",           dest="leveldbDir",  default='DEFAULT', type='str',          help="Location to store blocks database (defaults to --datadir)")
 parser.add_option("--rpcport",         dest="rpcport",     default='DEFAULT', type="str",          help="RPC port for running armoryd.py")
@@ -92,7 +92,7 @@ parser.add_option("--skip-stats-report", dest="skipStatsReport", default=False, 
 parser.add_option("--skip-announce-check",dest="skipAnnounceCheck", default=False, action="store_true", help="Do not query for Armory announcements")
 parser.add_option("--tor",             dest="useTorSettings", default=False, action="store_true", help="Enable common settings for when Armory connects through Tor")
 parser.add_option("--keypool",         dest="keypool",     default=100, type="int",                help="Default number of addresses to lookahead in Armory wallets")
-parser.add_option("--redownload",      dest="redownload",  default=False,     action="store_true", help="Delete Bitcoin-Qt/bitcoind databases; redownload")
+parser.add_option("--redownload",      dest="redownload",  default=False,     action="store_true", help="Delete Peercoin-Core/bitcoind databases; redownload")
 parser.add_option("--rebuild",         dest="rebuild",     default=False,     action="store_true", help="Rebuild blockchain database and rescan")
 parser.add_option("--rescan",          dest="rescan",      default=False,     action="store_true", help="Rescan existing blockchain DB")
 parser.add_option("--maxfiles",        dest="maxOpenFiles",default=0,         type="int",          help="Set maximum allowed open files for LevelDB databases")
@@ -344,7 +344,7 @@ def readVersionInt(verInt):
    verList.append( int(verStr[:-7       ]) )
    return tuple(verList[::-1])
 
-# Allow user to override default bitcoin-qt/bitcoind home directory
+# Allow user to override default Peercoin-Core/bitcoind home directory
 if not CLI_OPTIONS.satoshiHome.lower()=='default':
    success = True
    if USE_TESTNET:
@@ -525,14 +525,14 @@ if not CLI_OPTIONS.satoshiPort == 'DEFAULT':
    try:
       BITCOIN_PORT = int(CLI_OPTIONS.satoshiPort)
    except:
-      raise TypeError('Invalid port for Bitcoin-Qt, using ' + str(BITCOIN_PORT))
+      raise TypeError('Invalid port for Peercoin-Core, using ' + str(BITCOIN_PORT))
 
 ################################################################################
 if not CLI_OPTIONS.satoshiRpcport == 'DEFAULT':
    try:
       BITCOIN_RPC_PORT = int(CLI_OPTIONS.satoshiRpcport)
    except:
-      raise TypeError('Invalid rpc port for Bitcoin-Qt, using ' + str(BITCOIN_RPC_PORT))
+      raise TypeError('Invalid rpc port for Peercoin-Core, using ' + str(BITCOIN_RPC_PORT))
 
 ################################################################################
 if not CLI_OPTIONS.rpcport == 'DEFAULT':
@@ -869,8 +869,8 @@ fileDelSettings = os.path.join(ARMORY_HOME_DIR, 'delsettings.flag')
 
 # Flag to remove everything in Bitcoin dir except wallet.dat (if requested)
 if os.path.exists(fileRedownload):
-   # Flag to remove *BITCOIN-QT* databases so it will have to re-download
-   LOGINFO('Found %s, will delete Bitcoin DBs & redownload' % fileRedownload)
+   # Flag to remove *Peercoin-Core* databases so it will have to re-download
+   LOGINFO('Found %s, will delete Peercoin DBs & redownload' % fileRedownload)
 
    os.remove(fileRedownload)
 
@@ -912,10 +912,10 @@ if os.path.exists(fileDelSettings):
 ################################################################################
 def deleteBitcoindDBs():
    if not os.path.exists(BTC_HOME_DIR):
-      LOGERROR('Could not find Bitcoin-Qt/bitcoind home dir to remove blk data')
+      LOGERROR('Could not find Peercoin-Core home dir to remove blk data')
       LOGERROR('  Does not exist: %s' % BTC_HOME_DIR)
    else:
-      LOGINFO('Found bitcoin home dir, removing blocks and databases')
+      LOGINFO('Found percoin home dir, removing blocks and databases')
 
       # Remove directories
       for btcDir in ['blocks', 'chainstate', 'database']:
@@ -2803,7 +2803,7 @@ def parseBitcoinURI(theStr):
    parts = theStr.split()
 
    # Now start walking through the parts and get the info out of it
-   if not parts[0].startswith('bitcoin:'):
+   if not parts[0].startswith('ppcoin:'):
       return {}
    
    uriData = {}
@@ -2859,7 +2859,7 @@ def uriPercentToReserved(theStr):
 
 ################################################################################
 def createBitcoinURI(addr, amt=None, msg=None):
-   uriStr = 'bitcoin:%s' % addr
+   uriStr = 'ppcoin:%s' % addr
    if amt or msg:
       uriStr += '?'
 
